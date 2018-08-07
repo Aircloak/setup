@@ -1,0 +1,18 @@
+{
+  "database": {
+    "host": "air_db",
+    "port": 5432,
+    "user": "air_db",
+    "name": "air_db",
+    "password": "air_db"
+  },
+  "site": {
+    "auth_secret": "needs a secret",
+    "endpoint_key_base": "needs a secret",
+    "api_token_salt": "needs a secret",
+    "master_password": "supersecret"
+  },
+  "psql_server": {
+    "require_ssl": false
+  }
+}
