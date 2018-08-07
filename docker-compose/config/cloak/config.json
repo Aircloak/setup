@@ -1,0 +1,6 @@
+{
+  "air_site": "ws://air:8080",
+  "salt": "needs a salt",
+  "concurrency": 8,
+  "data_sources": "data_sources"
+}
