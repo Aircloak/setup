@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: air-db
+  name: air-db
+  namespace: aircloak
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: air-db
+    spec:
+      containers:
+      - image: quay.io/aircloak/air_db:latest
+        name: air-db
+        ports:
+        - containerPort: 5432
+        resources: {}
+        volumeMounts:
+        - mountPath: /runtime_config
+          name: air-db-config
+          readOnly: true
+        - mountPath: /var/lib/postgresql
+          name: air-db-claim
+      imagePullSecrets:
+        - name: aircloak-external-pwc-pull-secret
+      restartPolicy: Always
+      volumes:
+      - name: air-db-claim
+        persistentVolumeClaim:
+          claimName: air-db-claim
+      - name: air-db-config
+        secret:
+          secretName: air-db-config-secret

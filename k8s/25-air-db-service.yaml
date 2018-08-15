@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: air-db
+  name: air-db
+spec:
+  ports:
+  - name: "7432"
+    port: 7432
+    targetPort: 5432
+  selector:
+    run: air-db

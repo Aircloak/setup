@@ -1,0 +1,54 @@
+    spec:
+      containers:
+      - image: mongo
+        name: mongodb
+        ports:
+          - containerPort: 27017
+        volumeMounts:
+          - name: mongodb-data
+            mountPath: /data/db
+      volumes:
+        - name: mongodb-data
+          persistentVolumeClaim:
+            claimName: mongodb-claim
+
+
+
+---------
+
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+  - name: mypod
+    image: redis
+    volumeMounts:
+    - name: foo
+      mountPath: "/etc/foo"
+      readOnly: true
+  volumes:
+  - name: foo
+    secret:
+      secretName: mysecret
+
+
+-----
+
+
+
+kubectl create secret generic db-user-pass --from-file=./username.txt --from-file=./password.txt
+
+--------
+# deploy script
+#!/bin/sh
+./create-secrets.sh
+kubectl --namespace=aircloak create secret generic air-db-config-secret --from-file=../k8s/docker-compose/config/air_db/config.json
+kubectl --namespace=aircloak create secret generic air-config-secret --from-file=../k8s/docker-compose/config/air/config.json
+....
+kubectl apply -f ./aircloak/*.yaml
+
+

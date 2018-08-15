@@ -1,0 +1,47 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: air
+  name: air
+  namespace: aircloak
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: air
+    spec:
+      containers:
+      - image: quay.io/aircloak/air:latest
+        name: air
+        command: ["/bin/bash"]
+        args: ["-e", "/air_starter/start_the_air.sh"]
+        ports:
+        - containerPort: 8080
+        - containerPort: 8081
+        - containerPort: 8432
+        - containerPort: 8443
+        volumeMounts:
+        - mountPath: /runtime_config
+          name: air-config
+          readOnly: true
+        - mountPath: /air_starter
+          name: air-starter
+      imagePullSecrets:
+        - name: aircloak-external-pwc-pull-secret
+      restartPolicy: Always
+      volumes:
+      - name: air-config
+        secret:
+          secretName: air-config-secret
+      - name: air-starter
+        secret:
+          secretName: air-starter
+
