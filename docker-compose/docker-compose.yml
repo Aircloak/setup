@@ -16,7 +16,6 @@ services:
     image: quay.io/aircloak/sebastian_air:latest
     volumes:
       - ./config/air:/runtime_config
-      - ./odbc_drivers:/odbc_drivers
     depends_on:
       - "air_db"
   cloak:
@@ -24,5 +23,6 @@ services:
     volumes:
       - ./config/cloak:/runtime_config
       - ./data/cloak:/persist
+      - ./odbc_drivers:/odbc_drivers
     depends_on:
       - "air"
