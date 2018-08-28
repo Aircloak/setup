@@ -13,13 +13,13 @@ services:
       - 8081:8081
       - 8432:8432
       - 8443:8443
-    image: quay.io/aircloak/sebastian_air:latest
+    image: quay.io/aircloak/air:latest
     volumes:
       - ./config/air:/runtime_config
     depends_on:
       - "air_db"
   cloak:
-    image: quay.io/aircloak/sebastian_cloak:latest
+    image: quay.io/aircloak/cloak:latest
     volumes:
       - ./config/cloak:/runtime_config
       - ./data/cloak:/persist
