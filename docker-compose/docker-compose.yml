@@ -6,18 +6,23 @@ services:
     image: quay.io/aircloak/air_db:latest
     volumes:
       - ./config/air_db:/runtime_config
-      - ./data/air_db:/var/lib/postgresql/data \
+      - ./data/air_db:/var/lib/postgresql/data
   air:
     ports:
       - 8080:8080
       - 8081:8081
       - 8432:8432
       - 8443:8443
-    image: quay.io/aircloak/air:latest
+    image: quay.io/aircloak/sebastian_air:latest
     volumes:
       - ./config/air:/runtime_config
+      - ./odbc_drivers:/odbc_drivers
+    depends_on:
+      - "air_db"
   cloak:
-    image: quay.io/aircloak/cloak:latest
+    image: quay.io/aircloak/sebastian_cloak:latest
     volumes:
       - ./config/cloak:/runtime_config
       - ./data/cloak:/persist
+    depends_on:
+      - "air"
