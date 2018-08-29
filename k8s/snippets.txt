@@ -52,3 +52,10 @@ kubectl --namespace=aircloak create secret generic air-config-secret --from-file
 kubectl apply -f ./aircloak/*.yaml
 
 
+
+-------
+
+
+kubectl -n aircloak create secret generic air-starter --from-file=k8s/start_the_air.sh
+
+

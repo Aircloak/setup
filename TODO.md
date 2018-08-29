@@ -1,3 +1,7 @@
+- HTTPS (letsencrypt) for air service/loadbalancer
+  - can we use an ingress for the http part
+  - and can we expose 5432 using the loadbalancer
+
 - fix the way we start the air, do not use a secret
 - snippets contains the commands to create the secrets, make that a bash script
 - start_the_air.sh shell script is used to bring up the air, permission topic, we'll find a better solution
