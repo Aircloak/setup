@@ -1,63 +1,30 @@
-    spec:
-      containers:
-      - image: mongo
-        name: mongodb
-        ports:
-          - containerPort: 27017
-        volumeMounts:
-          - name: mongodb-data
-            mountPath: /data/db
-      volumes:
-        - name: mongodb-data
-          persistentVolumeClaim:
-            claimName: mongodb-claim
+----
 
+setup imagepullsecret to pull from aircloak registry
 
+first, get a dockerconfig from your docker registry provider.
 
----------
+kubectl --namespace=aircloak create -f aircloak-external-pwc-secret.yml
 
-
-
-apiVersion: v1
-kind: Pod
-metadata:
-  name: mypod
-spec:
-  containers:
-  - name: mypod
-    image: redis
-    volumeMounts:
-    - name: foo
-      mountPath: "/etc/foo"
-      readOnly: true
-  volumes:
-  - name: foo
-    secret:
-      secretName: mysecret
-
-
------
-
-
-
-kubectl create secret generic db-user-pass --from-file=./username.txt --from-file=./password.txt
 
 --------
-# deploy script
+# create secrets and configmaps
+# TODO: delete secrets&configmaps kubectl --namespace
 #!/bin/sh
-./create-secrets.sh
+
+kubectl create namespace aircloak || true
+
+#### AIRDB CONFIG
+# kubectl --namespace=aircloak delete secret air-db-config-secret || true
 kubectl --namespace=aircloak create secret generic air-db-config-secret --from-file=../docker-compose/config/air_db/config.json
+
+#### AIR CONFIG
 kubectl --namespace=aircloak create secret generic air-config-secret --from-file=../docker-compose/config/air/config.json
-kubectl --namespace=aircloak create secret generic cloak-config --from-file=./docker-compose/config/cloak/config.json
+kubectl --namespace=aircloak create secret generic air-starter --from-file=k8s/start_the_air.sh
+
+### CLOAK CONFIG
 kubectl --namespace=aircloak create configmap cloak-configmap --from-file=docker-compose/config/cloak --from-file=docker-compose/config/cloak/data_sources
-....
-kubectl apply -f ./aircloak/*.yaml
 
-
-
+# exclude namespace.yaml
+kubectl --namespace=aircloak apply -f ./aircloak/*.yaml
 -------
-
-
-kubectl -n aircloak create secret generic air-starter --from-file=k8s/start_the_air.sh
-
-
