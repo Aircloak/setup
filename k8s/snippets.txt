@@ -49,6 +49,7 @@ kubectl create secret generic db-user-pass --from-file=./username.txt --from-fil
 kubectl --namespace=aircloak create secret generic air-db-config-secret --from-file=../docker-compose/config/air_db/config.json
 kubectl --namespace=aircloak create secret generic air-config-secret --from-file=../docker-compose/config/air/config.json
 kubectl --namespace=aircloak create secret generic cloak-config --from-file=./docker-compose/config/cloak/config.json
+kubectl --namespace=aircloak create configmap cloak-configmap --from-file=docker-compose/config/cloak --from-file=docker-compose/config/cloak/data_sources
 ....
 kubectl apply -f ./aircloak/*.yaml
 

@@ -30,8 +30,13 @@ spec:
       restartPolicy: Always
       volumes:
       - name: cloak-config
-        secret:
-          secretName: cloak-config
+        configMap:
+          name: cloak-configmap
+          items:
+            - key: config.json
+              path: config.json
+            - key: sample.json
+              path: data_sources/sample.json
       - name: cloak-persist
         persistentVolumeClaim:
           claimName: cloak-persist
