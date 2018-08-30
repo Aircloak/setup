@@ -4,7 +4,6 @@ metadata:
   labels:
     run: cloak
   name: cloak
-  namespace: aircloak
 spec:
   replicas: 1
   strategy:

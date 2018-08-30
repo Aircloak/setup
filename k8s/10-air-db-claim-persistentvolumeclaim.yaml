@@ -4,7 +4,6 @@ metadata:
   labels:
     run: air-db-claim
   name: air-db-claim
-  namespace: aircloak
 spec:
   accessModes:
   - ReadWriteOnce

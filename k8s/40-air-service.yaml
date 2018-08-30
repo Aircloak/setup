@@ -4,7 +4,6 @@ metadata:
   labels:
     run: air
   name: air
-  namespace: aircloak
 spec:
   ports:
   - name: "80-to-8080-tcp"

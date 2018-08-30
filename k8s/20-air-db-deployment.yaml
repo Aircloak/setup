@@ -4,7 +4,6 @@ metadata:
   labels:
     run: air-db
   name: air-db
-  namespace: aircloak
 spec:
   replicas: 1
   revisionHistoryLimit: 3

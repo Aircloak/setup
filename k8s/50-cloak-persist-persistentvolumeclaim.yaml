@@ -4,7 +4,6 @@ metadata:
   labels:
     run: cloak-persist
   name: cloak-persist
-  namespace: aircloak
 spec:
   accessModes:
   - ReadWriteOnce
