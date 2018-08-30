@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    run: air
-  name: air
+    run: air-external
+  name: air-external
 spec:
   ports:
   - name: "80-to-8080-tcp"
