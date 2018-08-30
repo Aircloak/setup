@@ -5,8 +5,6 @@ metadata:
     run: cloak-persist
   name: cloak-persist
   namespace: aircloak
-  annotations:
-    volume.beta.kubernetes.io/storage-class: fast
 spec:
   accessModes:
   - ReadWriteOnce

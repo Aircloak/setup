@@ -4,8 +4,6 @@ metadata:
   labels:
     run: air-db-claim
   name: air-db-claim
-  annotations:
-    volume.beta.kubernetes.io/storage-class: fast
   namespace: aircloak
 spec:
   accessModes:
