@@ -19,10 +19,8 @@ spec:
         run: air
     spec:
       containers:
-      - image: quay.io/aircloak/air:18.3.1
+      - image: quay.io/aircloak/sebastian_air:18.4.0
         name: air
-        command: ["/bin/bash"]
-        args: ["-e", "/air_starter/start_the_air.sh"]
         ports:
         - containerPort: 8080
         - containerPort: 8081
@@ -32,8 +30,6 @@ spec:
         - mountPath: /runtime_config
           name: air-config
           readOnly: true
-        - mountPath: /air_starter
-          name: air-starter
       imagePullSecrets:
         - name: aircloak-external-pull-secret
       restartPolicy: Always
@@ -41,7 +37,3 @@ spec:
       - name: air-config
         secret:
           secretName: air-config-secret
-      - name: air-starter
-        secret:
-          secretName: air-starter
-
