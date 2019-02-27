@@ -20,4 +20,6 @@ You will need the following to get a working system:
 In order to setup your system, perform the following steps:
 
 1. Run `create-secrets.sh` to update the secrets in the `air` and `cloak` configurations
+1. On the initial setup first run `docker-compose up air_db` as the database container needs some time for the initial
+   setup
 1. Invoke `docker-compose up`
