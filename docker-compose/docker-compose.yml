@@ -3,7 +3,7 @@ services:
   air_db:
     ports:
       - 7432:5432
-    image: quay.io/aircloak/air_db:latest
+    image: quay.io/aircloak/aircloak_db:latest
     volumes:
       - ./config/air_db:/runtime_config
       - ./data/air_db:/var/lib/postgresql/data
