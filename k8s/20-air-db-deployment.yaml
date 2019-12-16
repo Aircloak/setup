@@ -18,7 +18,7 @@ spec:
         run: air-db
     spec:
       containers:
-      - image: quay.io/aircloak/air_db:latest
+      - image: quay.io/aircloak/aircloak_db:latest
         name: air-db
         ports:
         - containerPort: 5432
